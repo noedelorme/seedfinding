@@ -1,35 +1,27 @@
 CC = gcc
 
 CUBIOMES_DIR = cubiomes
-BUILD_DIR = build
-SRC_DIR = src
+CUBIOMES_BUILD = $(CUBIOMES_DIR)/build
+CUBIOMES_LIB = $(CUBIOMES_BUILD)/libcubiomes_static.a
 
-CUBIOMES_LIB = $(CUBIOMES_DIR)/build/libcubiomes_static.a
+SRC_DIR = src
+BUILD_DIR = build
 
 CFLAGS = -I$(CUBIOMES_DIR)
 LDFLAGS = $(CUBIOMES_LIB) -lm
 
-SOURCES := $(wildcard $(SRC_DIR)/*.c)
-TARGETS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%,$(SOURCES))
+.PHONY: all run clean
 
-.PHONY: all cubiomes run clean
-
-all: cubiomes $(TARGETS)
-
-cubiomes:
-	cmake -S $(CUBIOMES_DIR) -B $(CUBIOMES_DIR)/build
-	cmake --build $(CUBIOMES_DIR)/build
-
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
-
-$(BUILD_DIR)/%: $(SRC_DIR)/%.c $(CUBIOMES_LIB) | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $< $(LDFLAGS) -o $@
+all:
+	cmake -S $(CUBIOMES_DIR) -B $(CUBIOMES_BUILD)
+	cmake --build $(CUBIOMES_BUILD)
 
 run:
-	@if [ -z "$(TARGET)" ]; then echo "Usage: make run TARGET=nom_du_programme"; exit 1; fi
+	@if [ -z "$(TARGET)" ]; then echo "Usage: make run TARGET=nom"; exit 1; fi
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) $(SRC_DIR)/$(TARGET).c $(LDFLAGS) -o $(BUILD_DIR)/$(TARGET)
 	./$(BUILD_DIR)/$(TARGET)
 
 clean:
 	rm -rf $(BUILD_DIR)
-	rm -rf $(CUBIOMES_DIR)/build
+	rm -rf $(CUBIOMES_BUILD)
