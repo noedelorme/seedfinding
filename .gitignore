@@ -1,0 +1,29 @@
+# Build de tes programmes
+
+build/
+
+# Build de cubiomes
+
+cubiomes/build/
+
+# macOS
+
+.DS_Store
+
+# Vim
+
+*.swp
+
+# VSCode
+
+.vscode/
+
+# CLion
+
+.idea/
+
+# Fichiers temporaires C
+
+*.o
+*.out
+*.dSYM/
