@@ -31,7 +31,7 @@ int main()
             applySeed(&g, DIM_OVERWORLD, seed);
 
             Pos spawn_pos = getSpawn(&g);
-            if (abs(bt_pos.x-spawn_pos.x) >= 16 || abs(bt_pos.z-spawn_pos.z) >= 16)
+            if (spawn_pos.x >= 16 || spawn_pos.z >= 16)
                 continue;
             
             if (!isViableStructurePos(Treasure, &g, bt_pos.x, bt_pos.z, 0))
@@ -41,6 +41,8 @@ int main()
                 continue;
 
             printf("Seed %" PRId64 " has a Treasure at (%d, %d) and a Village (%d, %d).\n", (int64_t) seed, bt_pos.x, bt_pos.z, v_pos.x, v_pos.z);
+            // printf("Seed %" PRId64 " has a Treasure at (%d, %d).\n", (int64_t) seed, bt_pos.x, bt_pos.z);
+
         }
 
         printf("------------------------");

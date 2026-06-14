@@ -16,7 +16,7 @@ int main()
         Pos spawn_pos = getSpawn(&g);
 
         Pos bt_pos;
-        if (!getStructurePos(Treasure, version, seed, spawn_pos.x, spawn_pos.z, &bt_pos))
+        if (!getStructurePos(Treasure, version, seed, (int) spawn_pos.x/16, (int) spawn_pos.z/16, &bt_pos))
             continue;
 
         if (!isViableStructurePos(Treasure, &g, bt_pos.x, bt_pos.z, 0))
