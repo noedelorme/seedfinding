@@ -1,5 +1,6 @@
-search bt at 0 0
-search jp at 0 0
+search with cubiomes (xpple's fork)
+bt at 0 0
+jp at 0 0
 bt and jp must be at most 1 chunck away from each other
 spawn must must be at most 2 chunck away from 0 0
 bt must contain 1 tnt and 12 irons, or 1 tnt and 10 irons with 2 golds
